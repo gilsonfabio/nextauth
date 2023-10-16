@@ -23,7 +23,7 @@ const authOptions: NextAuthOptions = {
 				})
 
 				const user = await response.json()
-				console.log(user)
+        //console.log(user)
 				
 				if (user && response.ok) {
 					return user
@@ -64,9 +64,10 @@ const authOptions: NextAuthOptions = {
     jwt: async ({ token, user }) => {
       const customUser = user as unknown as any
 
-      if (user) {
+      if (user) {        
         return {
           ...token,
+          id: user.id,
           role: 'admin'   //customUser.role
         }
       }
@@ -79,7 +80,8 @@ const authOptions: NextAuthOptions = {
         user: {
           name: token.name,
           email: token.email,
-          role: token.role
+          role: token.role,
+          id: token.id
         }
       }
     }

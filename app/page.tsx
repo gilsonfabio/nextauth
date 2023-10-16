@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import Cookie from 'js-cookie';
 
 import api from '../components/Services/api';
 import { FaBars } from 'react-icons/fa';
@@ -107,8 +106,8 @@ export default function Home() {
     const router = useRouter();
 
     function handleSubmit(item: any) {
-        Cookie.set('auth_user', '1')
-        router.push(`/Aposta/${item.movId}`)
+        const idUser = item.movId;
+        router.push(`/Aposta/${idUser}`)
     }
 
     const [ids, setIds] = useState<Array<number>>([]);
@@ -312,7 +311,7 @@ export default function Home() {
     }
 
     return (
-        <div className="w-full max-w-screen-xl h-screen">
+        <div className="w-full h-screen">
             <div className='flex flex-col md:flex-row w-full h-auto'>
                 <div className='bg-gray-300 w-full md:w-[25%] h-auto z-10 md:ml-20'>
                     <span className="text-green-700 text-base font-semibold ml-3">
@@ -392,7 +391,7 @@ export default function Home() {
                                                     type="checkbox"
                                                     value={item.equId}
                                                     onChange={selectEquipe}
-                                                    checked={idsEve.includes(item.equId) ? true : false}
+                                                    checked={idsEqu.includes(item.equId) ? true : false}
                                                 />
                                             </div>
                                             ))}
